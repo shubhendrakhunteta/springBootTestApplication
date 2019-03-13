@@ -2,54 +2,54 @@ package com.shubhendra.sprintBootTestProject.springBootTestApplication.DTO;
 
 public class PersonDTO {
 
-	private int personId;
-	private String firstName;
-	private String lastName;
-	private int age;
+	private int id;
+	private String name;
+	private String email;
+	private String phone;
 
 	public PersonDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public PersonDTO(int personId, String firstName, String lastName, int age) {
+	public PersonDTO(int id, String name, String email, String phone) {
 		super();
-		this.personId = personId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.age = age;
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
 	}
 
-	public int getPersonId() {
-		return personId;
+	public int getId() {
+		return id;
 	}
 
-	public void setPersonId(int personId) {
-		this.personId = personId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public int getAge() {
-		return age;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 }
