@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +35,7 @@ public class PersonController {
 		persons.put(4, new PersonDTO(4, "John Winchester", "John@sn.com", "5544332211"));
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping(value = "/person/{id}")
 	@ResponseBody()
 	public PersonDTO getPerson(@PathVariable("id") int id) {
@@ -41,25 +43,31 @@ public class PersonController {
 		return persons.get(id);
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping(value = "/person/", produces = "application/json")
 	public ResponseEntity<?> addPerson(@RequestBody PersonDTO person, UriComponentsBuilder ucBuilder) {
 		persons.put(person.getId(), person);
-		System.out.println(persons.keySet());
+		System.out.println(persons);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/getPerson/{id}").buildAndExpand(person.getId()).toUri());
 		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/person/", method = RequestMethod.GET)
 	public ResponseEntity<List<PersonDTO>> listAllPersons() {
 		List<PersonDTO> users = Collections.list(Collections.enumeration(persons.values()));
 		if (users.isEmpty()) {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<List<PersonDTO>>(users, HttpStatus.OK);
+		ResponseEntity res = new ResponseEntity<List<PersonDTO>>(users, HttpStatus.OK);
+//		res.getHeaders().add("Access-Control-Allow-Origin", "*");
+//		res.getHeaders().add("Access-Control-Allow-Methods", "GET, POST");
+		return res;
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/person/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deletePerson(@PathVariable("id") int id) {
 
@@ -71,6 +79,7 @@ public class PersonController {
 		return new ResponseEntity<PersonDTO>(HttpStatus.NO_CONTENT);
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/person/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updatePerson(@PathVariable("id") int id, @RequestBody PersonDTO person) {
 

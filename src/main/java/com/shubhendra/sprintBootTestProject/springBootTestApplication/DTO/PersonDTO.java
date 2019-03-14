@@ -52,4 +52,9 @@ public class PersonDTO {
 		this.phone = phone;
 	}
 
+	@Override
+	public String toString() {
+		return "PersonDTO [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + "]";
+	}
+
 }
